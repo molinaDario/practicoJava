@@ -1,4 +1,10 @@
-com/molinadario/implementes/ProductoImplementsService.class
-com/molinadario/entity/Producto.class
+com/molindario/exception/ClienteException.class
 com/molinadario/service/ProductoService.class
+com/molinadario/service/ClienteService.class
 com/molinadario/controller/LogginController.class
+com/molinadario/implementes/ClienteImplementsService.class
+com/molinadario/implementes/ProductoImplementsService.class
+com/molinadario/webservice/ClienteWebService.class
+com/molinadario/entity/Cliente.class
+com/molinadario/entity/Producto.class
+org/netbeans/rest/application/config/ApplicationConfig.class
