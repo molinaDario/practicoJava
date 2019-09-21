@@ -16,6 +16,9 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_cliente;
 
+    @Column(name = "dni")
+    private int dni;
+
     @Column(name = "nombre")
     private String nombre;
 
@@ -34,7 +37,8 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellido, String direccion, double saldo, double puntos) {
+    public Cliente(int dni, String nombre, String apellido, String direccion, double saldo, double puntos) {
+        this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -48,6 +52,14 @@ public class Cliente implements Serializable {
 
     public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 
     public String getNombre() {
@@ -92,9 +104,9 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id_cliente=" + id_cliente + ", nombre=" + nombre
-                + ", apellido=" + apellido + ", direccion=" + direccion
-                + ", saldo=" + saldo + ", puntos=" + puntos + '}';
+        return "Cliente{" + "id_cliente=" + id_cliente + ", dni=" + dni
+                + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion="
+                + direccion + ", saldo=" + saldo + ", puntos=" + puntos + '}';
     }
 
 }

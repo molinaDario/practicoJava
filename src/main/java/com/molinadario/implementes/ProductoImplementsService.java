@@ -25,4 +25,10 @@ public class ProductoImplementsService implements ProductoService {
         return producto;
     }
 
+    @Override
+    public Producto createProduct(Producto producto) {
+        entityManager.persist(producto);
+        return producto;
+    }
+
 }

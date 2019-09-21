@@ -16,6 +16,9 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_producto;
 
+    @Column(name = "nombre")
+    private String nombre;
+
     @Column(name = "descripcion")
     private String descripcion;
 
@@ -25,17 +28,18 @@ public class Producto implements Serializable {
     @Column(name = "nivel_reposicion")
     private int nivel_reposicion;
 
-    @Column(name = "costo")
-    private double costo;
+    @Column(name = "precio")
+    private double precio;
 
     public Producto() {
     }
 
-    public Producto(String descripcion, int stock, int nivel_reposicion, double costo) {
+    public Producto(String nombre, String descripcion, int stock, int nivel_reposicion, double precio) {
+        this.nombre = nombre;
         this.descripcion = descripcion;
         this.stock = stock;
         this.nivel_reposicion = nivel_reposicion;
-        this.costo = costo;
+        this.precio = precio;
     }
 
     public int getId_producto() {
@@ -44,6 +48,14 @@ public class Producto implements Serializable {
 
     public void setId_producto(int id_producto) {
         this.id_producto = id_producto;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
@@ -70,17 +82,19 @@ public class Producto implements Serializable {
         this.nivel_reposicion = nivel_reposicion;
     }
 
-    public double getCosto() {
-        return costo;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setCosto(double costo) {
-        this.costo = costo;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "id_producto=" + id_producto + ", descripcion=" + descripcion + ", stock=" + stock + ", nivel_reposicion=" + nivel_reposicion + ", costo=" + costo + '}';
+        return "Producto{" + "id_producto=" + id_producto + ", descripcion="
+                + descripcion + ", stock=" + stock + ", nivel_reposicion="
+                + nivel_reposicion + ", precio=" + precio + '}';
     }
 
 }
