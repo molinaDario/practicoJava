@@ -7,4 +7,5 @@ com/molinadario/implementes/ProductoImplementsService.class
 com/molinadario/webservice/ClienteWebService.class
 com/molinadario/entity/Cliente.class
 com/molinadario/entity/Producto.class
+com/molinadario/entity/Canje.class
 org/netbeans/rest/application/config/ApplicationConfig.class

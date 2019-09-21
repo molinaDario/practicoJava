@@ -5,6 +5,7 @@
  */
 package com.molinadario.controller;
 
+import com.molinadario.entity.Producto;
 import com.molinadario.service.ProductoService;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -28,8 +29,7 @@ public class LogginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        System.out.println("El producto encontrado es : "+ productoService.buscarProducto(1).toString());
+  
         
     }
 
