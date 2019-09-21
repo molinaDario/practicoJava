@@ -7,6 +7,7 @@ package com.molinadario.controller;
 
 import com.molinadario.entity.Cliente;
 import com.molinadario.entity.Producto;
+import com.molinadario.service.CanjeService;
 import com.molinadario.service.ClienteService;
 import com.molinadario.service.ProductoService;
 import java.io.IOException;
@@ -23,21 +24,22 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "LogginController", urlPatterns = {"/LogginController"})
 public class LogginController extends HttpServlet {
- 
+
     @EJB
     private ProductoService productoService;
-    
+
     @EJB
     private ClienteService clienteService;
-    
+
+    @EJB
+    private CanjeService canjeService;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-  
-     //*** nuevo Cliente    
-        Cliente myCliente = new Cliente(12345678, "Fernando", "Villarroel", "Anisacate", 5000, 1000);
-        clienteService.newCliente(myCliente);
+
+        canjeService.newCanje(1, 1);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
