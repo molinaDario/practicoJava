@@ -1,11 +1,15 @@
 package com.molinadario.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,7 +38,11 @@ public class Cliente implements Serializable {
     @Column(name = "puntos")
     private double puntos;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private List<Canje> listCanje;
+
     public Cliente() {
+        this.listCanje = new ArrayList();
     }
 
     public Cliente(int dni, String nombre, String apellido, String direccion, double saldo, double puntos) {
@@ -100,6 +108,18 @@ public class Cliente implements Serializable {
 
     public void setPuntos(double puntos) {
         this.puntos = puntos;
+    }
+
+    public List<Canje> getListCanje() {
+        return listCanje;
+    }
+
+    public void setListCanje(List<Canje> listCanje) {
+        this.listCanje = listCanje;
+    }
+
+    public void addListCanje(Canje canje) {
+        this.listCanje.add(canje);
     }
 
     @Override
