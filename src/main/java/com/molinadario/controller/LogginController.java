@@ -5,8 +5,6 @@
  */
 package com.molinadario.controller;
 
-import com.molinadario.entity.Cliente;
-import com.molinadario.entity.Producto;
 import com.molinadario.service.CanjeService;
 import com.molinadario.service.ClienteService;
 import com.molinadario.service.ProductoService;
@@ -38,7 +36,9 @@ public class LogginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        canjeService.newCanje(1, 1);
+        //canjeService.newCanje(1, 1);
+        
+        clienteService.findCanje(1);
 
     }
 
