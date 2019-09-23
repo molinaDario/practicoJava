@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Proyecto java EE</h1>
+
+<head>
+    <title>Start Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/logginStyle.css">
+</head>
+
+<body>
+
+    <div class="login-user">
+
+        <img class="logoJava" src="imag/java.jpeg">
+        <h1>LOGIN</h1>
 
         <form action="LogginController" method="GET">
-            Usuario:
-            <input type="text" id="usuario" required>
-            <br>
-            Clave:
-            <input type="password" id="clave" required>
-            <br>
-            <br>
-            <input type="submit">
+
+            <!--Username-->
+            <label for="username">UserName</label>
+            <input type="text" id="usuario" required placeholder="Enter Users">
+
+            <!--Password-->
+            <label for="password">Password</label>
+            <input type="password" id="clave" required placeholder="Enter Password">
+
+
+            <input type="submit" value="Enter">
         </form>
-    </body>
+
+
+    </div>
+
+</body>
+
 </html>
