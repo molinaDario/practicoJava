@@ -36,10 +36,18 @@ public class LogginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        //canjeService.newCanje(1, 1);
-        
-        clienteService.findCanje(1);
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
 
+        if ((user != null && pass != null)
+                && (user.equalsIgnoreCase("molinaDario")) && pass.equalsIgnoreCase("1234")) {
+            
+             request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
+            
+
+        }else{
+            request.getRequestDispatcher("Error.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
