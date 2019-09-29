@@ -5,12 +5,8 @@
  */
 package com.molinadario.controller;
 
-import com.molinadario.entity.Producto;
-import com.molinadario.service.CanjeService;
-import com.molinadario.service.ClienteService;
-import com.molinadario.service.ProductoService;
 import java.io.IOException;
-import javax.ejb.EJB;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,39 +17,32 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dario
  */
-@WebServlet(name = "LogginController", urlPatterns = {"/LogginController"})
-public class LogginController extends HttpServlet {
+@WebServlet(name = "ProductoController", urlPatterns = {"/ProductoController"})
+public class ProductoController extends HttpServlet {
 
-    @EJB
-    private ProductoService productoService;
-
-
-    @EJB
-    private ClienteService clienteService;
-
-    @EJB
-    private CanjeService canjeService;
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-<<<<<<< HEAD
-        canjeService.newCanje(1, 1);
-
-=======
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
->>>>>>> a823d84... menu principal
-
-        if ((user != null && pass != null)
-                && (user.equalsIgnoreCase("molinaDario")) && pass.equalsIgnoreCase("1234")) {
-            
-             request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
-            
-
-        }else{
-            request.getRequestDispatcher("Error.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ProductoController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ProductoController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

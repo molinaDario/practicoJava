@@ -1,60 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.molinadario.controller;
 
-import com.molinadario.entity.Producto;
-import com.molinadario.service.CanjeService;
-import com.molinadario.service.ClienteService;
-import com.molinadario.service.ProductoService;
 import java.io.IOException;
-import javax.ejb.EJB;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author dario
- */
-@WebServlet(name = "LogginController", urlPatterns = {"/LogginController"})
-public class LogginController extends HttpServlet {
-
-    @EJB
-    private ProductoService productoService;
-
-
-    @EJB
-    private ClienteService clienteService;
-
-    @EJB
-    private CanjeService canjeService;
+@WebServlet(name = "ClienteController", urlPatterns = {"/ClienteController"})
+public class ClienteController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-<<<<<<< HEAD
-        canjeService.newCanje(1, 1);
-
-=======
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
->>>>>>> a823d84... menu principal
-
-        if ((user != null && pass != null)
-                && (user.equalsIgnoreCase("molinaDario")) && pass.equalsIgnoreCase("1234")) {
-            
-             request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
-            
-
-        }else{
-            request.getRequestDispatcher("Error.jsp").forward(request, response);
-        }
+        System.out.println("Estoy en el contorler cliente");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

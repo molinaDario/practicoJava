@@ -5,6 +5,9 @@
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/service/ClienteService.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/entity/Canje.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/webservice/ClienteWebService.java
+/home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/controller/ClienteController.java
+/home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/controller/CanjeController.java
+/home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/controller/ProductoController.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/implementes/CanjeImplementsService.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/implementes/ProductoImplementsService.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/entity/Producto.java
