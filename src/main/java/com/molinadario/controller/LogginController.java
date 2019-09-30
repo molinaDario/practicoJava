@@ -27,7 +27,6 @@ public class LogginController extends HttpServlet {
     @EJB
     private ProductoService productoService;
 
-
     @EJB
     private ClienteService clienteService;
 
@@ -38,21 +37,15 @@ public class LogginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-<<<<<<< HEAD
-        canjeService.newCanje(1, 1);
-
-=======
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
->>>>>>> a823d84... menu principal
 
         if ((user != null && pass != null)
                 && (user.equalsIgnoreCase("molinaDario")) && pass.equalsIgnoreCase("1234")) {
-            
-             request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
-            
 
-        }else{
+            request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
+
+        } else {
             request.getRequestDispatcher("Error.jsp").forward(request, response);
         }
     }
