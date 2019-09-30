@@ -7,10 +7,12 @@ package com.molinadario.implementes;
 
 import com.molinadario.entity.Producto;
 import com.molinadario.service.ProductoService;
+import com.molindario.exception.ProductoException;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class ProductoImplementsService implements ProductoService {
@@ -29,6 +31,22 @@ public class ProductoImplementsService implements ProductoService {
     public Producto createProduct(Producto producto) {
         entityManager.persist(producto);
         return producto;
+    }
+
+    @Override
+    public List<Producto> allProducto() {
+
+        List<Producto> listProducto = null;
+
+        TypedQuery<Producto> queryAllProducto = entityManager.createNamedQuery("all_producto", Producto.class);
+
+        listProducto = queryAllProducto.getResultList();
+
+        if (listProducto != null) {
+            return listProducto;
+        } else {
+            throw new ProductoException("No hay Productos");
+        }
     }
 
 }

@@ -13,5 +13,12 @@ public interface ClienteService {
     void deleteCliente(int idCliente);
 
     void updateCliente(int idCliente, Cliente updateCliente);
+<<<<<<< HEAD
 
+=======
+    
+    List<Canje> findCanje(int idCliente);
+    
+    List<Cliente> allCliente();
+>>>>>>> b171aa2... vista producto
 }

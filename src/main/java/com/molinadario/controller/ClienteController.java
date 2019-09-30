@@ -1,7 +1,10 @@
 package com.molinadario.controller;
 
+import com.molinadario.entity.Cliente;
+import com.molinadario.service.ClienteService;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,11 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ClienteController", urlPatterns = {"/ClienteController"})
 public class ClienteController extends HttpServlet {
 
+    @EJB
+    private ClienteService clienteService;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        System.out.println("Estoy en el contorler cliente");
+        List<Cliente> listCliente = clienteService.allCliente();
+
+        request.setAttribute("listCliente", listCliente);
+
+        request.getRequestDispatcher("ViewCliente.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
