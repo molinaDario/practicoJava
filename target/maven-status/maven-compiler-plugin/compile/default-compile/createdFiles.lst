@@ -10,6 +10,7 @@ com/molinadario/controller/ProductoController.class
 com/molinadario/service/ProductoService.class
 com/molinadario/service/ClienteService.class
 com/molinadario/controller/LogginController.class
+com/molindario/exception/ProductoException.class
 com/molinadario/service/CanjeService.class
 com/molinadario/implementes/CanjeImplementsService.class
 com/molinadario/webservice/ClienteWebService.class

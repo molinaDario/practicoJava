@@ -4,11 +4,13 @@ import com.molinadario.entity.Canje;
 import com.molinadario.entity.Cliente;
 import com.molinadario.service.ClienteService;
 import com.molindario.exception.ClienteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class ClienteImplementsService implements ClienteService {
@@ -79,6 +81,23 @@ public class ClienteImplementsService implements ClienteService {
             return listCanje;
         } else {
             throw new ClienteException("ERROR (Cliente no existe) ");
+        }
+
+    }
+
+    @Override
+    public List<Cliente> allCliente() {
+
+        List<Cliente> listCliente = null;
+
+        TypedQuery<Cliente> queryCliente = entityManager.createNamedQuery("All_Cliente", Cliente.class);
+
+        listCliente = queryCliente.getResultList();
+
+        if (listCliente != null) {
+            return listCliente;
+        } else {
+            throw new ClienteException("No existe ninun cliente");
         }
 
     }

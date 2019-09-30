@@ -17,4 +17,6 @@ public interface ClienteService {
     void updateCliente(int idCliente, Cliente updateCliente);
     
     List<Canje> findCanje(int idCliente);
+    
+    List<Cliente> allCliente();
 }
