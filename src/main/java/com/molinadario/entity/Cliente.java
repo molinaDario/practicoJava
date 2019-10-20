@@ -3,9 +3,11 @@ package com.molinadario.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +44,8 @@ public class Cliente implements Serializable {
     @Column(name = "puntos")
     private double puntos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
+    @JsonbTransient
     private List<Canje> listCanje;
 
     public Cliente() {
@@ -130,7 +133,8 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Cliente{" + "id_cliente=" + id_cliente + ", dni=" + dni
                 + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion="
-                + direccion + ", saldo=" + saldo + ", puntos=" + puntos + '}';
+                + direccion + ", saldo=" + saldo + ", puntos=" + puntos
+                + ", listCanje=" + listCanje + '}';
     }
 
 }

@@ -5,8 +5,13 @@
  */
 package com.molinadario.controller;
 
+import com.molinadario.entity.Cliente;
+import com.molinadario.entity.Producto;
+import com.molinadario.service.ClienteService;
+import com.molinadario.service.ProductoService;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,30 +25,25 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CanjeController", urlPatterns = {"/CanjeController"})
 public class CanjeController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @EJB
+    private ProductoService productoService;
+
+    @EJB
+    private ClienteService clienteService;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CanjeController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CanjeController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
+        List<Producto> listProducto = productoService.allProducto();
+
+        Cliente cliente = clienteService.findCliente(1);
+
+        request.setAttribute("Cliente", cliente);
+
+        request.setAttribute("allProducto", listProducto);
+
+        request.getRequestDispatcher("ViewCanje.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

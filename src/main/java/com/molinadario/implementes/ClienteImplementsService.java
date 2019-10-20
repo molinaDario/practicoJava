@@ -4,7 +4,6 @@ import com.molinadario.entity.Canje;
 import com.molinadario.entity.Cliente;
 import com.molinadario.service.ClienteService;
 import com.molindario.exception.ClienteException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;

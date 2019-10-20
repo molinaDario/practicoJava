@@ -1,6 +1,7 @@
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/service/ProductoService.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/implementes/ClienteImplementsService.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molindario/exception/ProductoException.java
+/home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/controller/CanjeProducto.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molindario/exception/ClienteException.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/controller/LogginController.java
 /home/dario/NetBeansProjects/PracticoJava/src/main/java/com/molinadario/service/ClienteService.java

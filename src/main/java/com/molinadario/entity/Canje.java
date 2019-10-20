@@ -10,11 +10,12 @@ public class Canje implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_canje;
-
+    
+    @ManyToOne
     @JoinColumn(name = "fk_cliente")
     private Cliente cliente;
 
-    @JoinColumn(name = "fk_producto")
+    @JoinColumn(name = "fk_producto")  
     private Producto producto;
 
     public Canje() {
@@ -51,8 +52,7 @@ public class Canje implements Serializable {
 
     @Override
     public String toString() {
-        return "Canje{" + "id_canje=" + id_canje + ", cliente=" + cliente
-                + ", producto=" + producto + '}';
+        return "Canje{" + "id_canje=" + id_canje + ", producto=" + producto + '}';
     }
 
 }
