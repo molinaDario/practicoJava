@@ -10,6 +10,8 @@ public interface ProductoService {
     Producto buscarProducto(int idProducto);
 
     Producto createProduct(Producto producto);
-    
+
     List<Producto> allProducto();
+
+    void updateProducto(Producto updateProducto);
 }

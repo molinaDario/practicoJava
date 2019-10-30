@@ -5,12 +5,12 @@
  */
 package com.molinadario.controller;
 
-import com.molinadario.entity.Cliente;
 import com.molinadario.entity.Producto;
 import com.molinadario.service.ClienteService;
 import com.molinadario.service.ProductoService;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,16 +30,16 @@ public class CanjeController extends HttpServlet {
 
     @EJB
     private ClienteService clienteService;
+    
+    private final static Logger LOGGER = Logger.getLogger(CanjeController.class.getName());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        LOGGER.info("   CanjeController");
+        
         List<Producto> listProducto = productoService.allProducto();
-
-        Cliente cliente = clienteService.findCliente(1);
-
-        request.setAttribute("Cliente", cliente);
 
         request.setAttribute("allProducto", listProducto);
 

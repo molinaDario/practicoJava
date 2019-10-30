@@ -5,13 +5,10 @@
  */
 package com.molinadario.controller;
 
-import com.molinadario.entity.Canje;
 import com.molinadario.entity.Cliente;
-import com.molinadario.service.CanjeService;
 import com.molinadario.service.ClienteService;
-import com.molinadario.service.ProductoService;
 import java.io.IOException;
-import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,40 +22,31 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "LogginController", urlPatterns = {"/LogginController"})
 public class LogginController extends HttpServlet {
-
-    @EJB
-    private ProductoService productoService;
-
+    
     @EJB
     private ClienteService clienteService;
-
-    @EJB
-    private CanjeService canjeService;
-
+    
+    private final static Logger LOGGER = Logger.getLogger(LogginController.class.getName());
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        /*------------------
-        MODO DE PRUEBA
-          ------------------
-         */
-        Cliente miCliente = clienteService.findCliente(1);
-        System.out.println("Mi cliente es: " + miCliente);
-
-        List<Canje> listCanje = miCliente.getListCanje();
-
-        for (Canje canje : listCanje) {
-            System.out.println("canje" + canje);
-        }
-        //--------------------------------------------------
+        
+        LOGGER.info("    LogginController");
+        
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
-
+        
         if ((user != null && pass != null)
                 && (user.equalsIgnoreCase("molinaDario")) && pass.equalsIgnoreCase("1234")) {
-
+            
+            Cliente miCliente = clienteService.findCliente(1);
+            System.out.println("Mi cliente es: " + miCliente);
+            
+            request.getSession().setAttribute("sessionCliente", miCliente);
+            
             request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
-
+            
         } else {
             request.getRequestDispatcher("Error.jsp").forward(request, response);
         }

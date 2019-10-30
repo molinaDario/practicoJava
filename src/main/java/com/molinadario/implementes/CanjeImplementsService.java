@@ -28,7 +28,7 @@ public class CanjeImplementsService implements CanjeService {
             Canje canje = new Canje(cliente, producto);
             cliente.addListCanje(canje);
         } else {
-            System.out.println("Error al crear un canje****************");
+            System.out.println("Error al crear un canje");
         }
     }
 

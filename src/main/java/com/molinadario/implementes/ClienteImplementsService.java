@@ -59,8 +59,17 @@ public class ClienteImplementsService implements ClienteService {
     }
 
     @Override
-    public void updateCliente(int idCliente, Cliente updateCliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateCliente(Cliente updateCliente) {
+        LOGGER.info("method updateCliente");
+
+        Cliente findCliente = entityManager.find(Cliente.class, updateCliente.getId_cliente());
+        
+        if (findCliente != null) {
+            entityManager.merge(updateCliente);
+            System.out.println("Cliente Actualizado "+findCliente);
+        } else {
+            throw new ClienteException("El cliente no es correcto");
+        }
     }
 
     @Override

@@ -36,7 +36,6 @@
                 </tr>
             </c:forEach>
 
-
         </table>
         <br>
 
@@ -46,24 +45,13 @@
 
             <br>
             <c:forEach var="productoList" items="${requestScope.allProducto}">
-                <label><input type="checkbox" name="productos" value="${productoList.getPrecio()}"> ${productoList.getNombre()}</label><br>
+                <label><input type="checkbox" name="productos" value="${productoList.getId_producto()}"> ${productoList.getNombre()}</label><br>
                 <br>
             </c:forEach>
             <br>
             <input type="submit" value="Canjear">
 
         </form>
-
-        <h2>Carro de compra</h2>
-   
-        <br>
-        <h2>Cliente</h2>
-
-        <%  Cliente cliente = (Cliente) request.getAttribute("Cliente");
-            out.print(cliente.toString());
-        %>
-
-        <br>
 
     </body>
 </html>

@@ -1,48 +1,85 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.molinadario.controller;
 
+import com.molinadario.entity.Canje;
 import com.molinadario.entity.Cliente;
+import com.molinadario.entity.Producto;
+import com.molinadario.service.CanjeService;
+import com.molinadario.service.ClienteService;
+import com.molinadario.service.ProductoService;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author dario
- */
 @WebServlet(name = "CanjeProducto", urlPatterns = {"/CanjeProducto"})
 public class CanjeProducto extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @EJB
+    private ProductoService productoService;
+
+    @EJB
+    private CanjeService canjeService;
+
+    @EJB
+    private ClienteService clienteService;
+
+    private List<Producto> listProducto;
+
+    private Canje myCanje;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        Cliente cliente = (Cliente) request.getSession().getAttribute("sessionCliente");
+
+        System.out.println("cliente session: " + cliente);
+
         String[] productoSeleccionado = request.getParameterValues("productos");
 
-        Cliente cliente = (Cliente) request.getAttribute("Cliente");
-
-        System.out.println(cliente);
+        double total = 0;
 
         if (productoSeleccionado != null) {
 
-            for (String elem : productoSeleccionado) {
-                System.out.print("Producto"+elem);
+            if (productoSeleccionado.length > 0) {
+
+                listProducto = new ArrayList<>();
+
+                for (String elem : productoSeleccionado) {
+                    int idProducto = Integer.parseInt(elem);
+                    listProducto.add(productoService.buscarProducto(idProducto));
+                }
+            }
+            for (Producto producto : listProducto) {
+                System.out.println(producto);
+                total += producto.getPrecio();
+            }
+            System.out.println("Total: " + total);
+
+            if (cliente.getSaldo() > total) {
+
+                for (Producto producto : listProducto) {
+
+                    myCanje = new Canje(cliente, producto);
+
+                    canjeService.newCanje(cliente.getId_cliente(), producto.getId_producto());
+
+                    producto.setStock(producto.getStock() - 1);
+
+                    cliente.setSaldo(cliente.getSaldo() - producto.getPrecio());
+
+                    clienteService.updateCliente(cliente);
+
+                    productoService.updateProducto(producto);
+                }
+                request.getRequestDispatcher("CanjeRealizado.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("Error.jsp").forward(request, response);
             }
         }
 
