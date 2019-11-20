@@ -1,6 +1,5 @@
 package com.molinadario.controller;
 
-import com.molinadario.entity.Canje;
 import com.molinadario.entity.Cliente;
 import com.molinadario.entity.Producto;
 import com.molinadario.service.CanjeService;
@@ -30,11 +29,11 @@ public class CanjeProducto extends HttpServlet {
 
     private List<Producto> listProducto;
 
-    private Canje myCanje;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        Cliente clienteUpdate = null;
 
         Cliente cliente = (Cliente) request.getSession().getAttribute("sessionCliente");
 
@@ -65,18 +64,22 @@ public class CanjeProducto extends HttpServlet {
 
                 for (Producto producto : listProducto) {
 
-                    myCanje = new Canje(cliente, producto);
+                    if (producto.getStock() > producto.getNivel_reposicion()) {
 
-                    canjeService.newCanje(cliente.getId_cliente(), producto.getId_producto());
+                        canjeService.newCanje(cliente.getId_cliente(), producto.getId_producto());
 
-                    producto.setStock(producto.getStock() - 1);
+                        producto.setStock(producto.getStock() - 1);
 
-                    cliente.setSaldo(cliente.getSaldo() - producto.getPrecio());
+                        cliente.setSaldo(cliente.getSaldo() - producto.getPrecio());
 
-                    clienteService.updateCliente(cliente);
+                        clienteUpdate = clienteService.updateCliente(cliente);
 
-                    productoService.updateProducto(producto);
+                        productoService.updateProducto(producto);
+                    }
                 }
+
+                request.setAttribute("ClienteUpdate", clienteUpdate);
+
                 request.getRequestDispatcher("CanjeRealizado.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("Error.jsp").forward(request, response);

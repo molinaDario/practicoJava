@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Canje realizado con exito</h1>
-        <%Cliente cliente = (Cliente) request.getSession().getAttribute("sessionCliente");
+        <%Cliente cliente = (Cliente) request.getAttribute("ClienteUpdate");
            out.print(cliente);
         %>
     </body>
