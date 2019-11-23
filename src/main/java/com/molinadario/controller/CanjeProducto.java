@@ -17,38 +17,38 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "CanjeProducto", urlPatterns = {"/CanjeProducto"})
 public class CanjeProducto extends HttpServlet {
-
+    
     @EJB
     private ProductoService productoService;
-
+    
     @EJB
     private CanjeService canjeService;
-
+    
     @EJB
     private ClienteService clienteService;
-
+    
     private List<Producto> listProducto;
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        
         Cliente clienteUpdate = null;
-
+        
         Cliente cliente = (Cliente) request.getSession().getAttribute("sessionCliente");
-
+        
         System.out.println("cliente session: " + cliente);
-
+        
         String[] productoSeleccionado = request.getParameterValues("productos");
-
+        
         double total = 0;
-
+        
         if (productoSeleccionado != null) {
-
+            
             if (productoSeleccionado.length > 0) {
-
+                
                 listProducto = new ArrayList<>();
-
+                
                 for (String elem : productoSeleccionado) {
                     int idProducto = Integer.parseInt(elem);
                     listProducto.add(productoService.buscarProducto(idProducto));
@@ -59,33 +59,35 @@ public class CanjeProducto extends HttpServlet {
                 total += producto.getPrecio();
             }
             System.out.println("Total: " + total);
-
+            
             if (cliente.getSaldo() > total) {
-
+                
                 for (Producto producto : listProducto) {
-
+                    
                     if (producto.getStock() > producto.getNivel_reposicion()) {
-
+                        
                         canjeService.newCanje(cliente.getId_cliente(), producto.getId_producto());
-
+                        
                         producto.setStock(producto.getStock() - 1);
-
+                        
                         cliente.setSaldo(cliente.getSaldo() - producto.getPrecio());
-
+                        
+                        cliente.setPuntos(cliente.getPuntos() + (total * 20) / 100);
+                        
                         clienteUpdate = clienteService.updateCliente(cliente);
-
+                        
                         productoService.updateProducto(producto);
                     }
                 }
-
+                
                 request.setAttribute("ClienteUpdate", clienteUpdate);
-
+                
                 request.getRequestDispatcher("CanjeRealizado.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("Error.jsp").forward(request, response);
             }
         }
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
