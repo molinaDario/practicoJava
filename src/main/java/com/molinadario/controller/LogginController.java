@@ -22,31 +22,37 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "LogginController", urlPatterns = {"/LogginController"})
 public class LogginController extends HttpServlet {
-    
+
     @EJB
     private ClienteService clienteService;
-    
+
+    private Cliente miCliente;
+
     private final static Logger LOGGER = Logger.getLogger(LogginController.class.getName());
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         LOGGER.info("    LogginController");
-        
+
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
-        
-        if ((user != null && pass != null)
-                && (user.equalsIgnoreCase("molinaDario")) && pass.equalsIgnoreCase("1234")) {
-            
-            Cliente miCliente = clienteService.findCliente(1);
-            System.out.println("Mi cliente es: " + miCliente);
-            
+
+        if (user != null && pass != null) {
+
+            if (user.equalsIgnoreCase("molinaDario") && pass.equalsIgnoreCase("1234")) {
+
+                miCliente = clienteService.findCliente(1);
+                System.out.println("Mi cliente es: " + miCliente);
+
+            } else if (user.equalsIgnoreCase("molinaFernando") && pass.equalsIgnoreCase("4321")) {
+                miCliente = clienteService.findCliente(2);
+            }
+
             request.getSession().setAttribute("sessionCliente", miCliente);
-            
             request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
-            
+
         } else {
             request.getRequestDispatcher("Error.jsp").forward(request, response);
         }

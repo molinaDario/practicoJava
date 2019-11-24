@@ -65,12 +65,16 @@ public class ClienteImplementsService implements ClienteService {
         Cliente findCliente = entityManager.find(Cliente.class, updateCliente.getId_cliente());
 
         if (findCliente != null) {
+
             entityManager.merge(updateCliente);
+            entityManager.flush();
+            entityManager.clear();
             System.out.println("Cliente Actualizado " + findCliente);
+
         } else {
             throw new ClienteException("El cliente no es correcto");
         }
-        return findCliente;
+        return entityManager.find(Cliente.class, updateCliente.getId_cliente());
     }
 
     @Override
