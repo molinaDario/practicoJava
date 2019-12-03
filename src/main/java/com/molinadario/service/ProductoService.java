@@ -14,4 +14,6 @@ public interface ProductoService {
     List<Producto> allProducto();
 
     void updateProducto(Producto updateProducto);
+    
+    Producto buscarProducto(String nombreProducto);
 }
