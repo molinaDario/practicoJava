@@ -43,7 +43,6 @@ public class ProductoWebService {
 
     @GET
     @Path("/{idProducto}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Producto buscarProducto(@PathParam("idProducto") int idProducto) {
 

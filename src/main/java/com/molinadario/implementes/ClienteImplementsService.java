@@ -113,41 +113,4 @@ public class ClienteImplementsService implements ClienteService {
             throw new ClienteException("No existe ninun cliente");
         }
     }
-
-    @Override
-    public List<Canje> findCanje(int idCliente) {
-
-        Cliente cliente = null;
-
-        cliente = entityManager.find(Cliente.class, idCliente);
-
-        if (cliente != null) {
-            List<Canje> listCanje = cliente.getListCanje();
-
-            for (Canje canje : listCanje) {
-                System.out.println("ListCanje: " + canje);
-            }
-            return listCanje;
-        } else {
-            throw new ClienteException("ERROR (Cliente no existe) ");
-        }
-
-    }
-
-    @Override
-    public List<Cliente> allCliente() {
-
-        List<Cliente> listCliente = null;
-
-        TypedQuery<Cliente> queryCliente = entityManager.createNamedQuery("All_Cliente", Cliente.class);
-
-        listCliente = queryCliente.getResultList();
-
-        if (listCliente != null) {
-            return listCliente;
-        } else {
-            throw new ClienteException("No existe ninun cliente");
-        }
-
-    }
 }
