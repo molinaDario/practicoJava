@@ -5,11 +5,10 @@
  */
 package com.molinadario.controller;
 
-import com.molinadario.entity.Producto;
-import com.molinadario.service.CanjeService;
+import com.molinadario.entity.Cliente;
 import com.molinadario.service.ClienteService;
-import com.molinadario.service.ProductoService;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,24 +24,33 @@ import javax.servlet.http.HttpServletResponse;
 public class LogginController extends HttpServlet {
 
     @EJB
-    private ProductoService productoService;
-
-    @EJB
     private ClienteService clienteService;
 
-    @EJB
-    private CanjeService canjeService;
+    private Cliente miCliente;
+
+    private final static Logger LOGGER = Logger.getLogger(LogginController.class.getName());
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        LOGGER.info("    LogginController");
+
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
 
-        if ((user != null && pass != null)
-                && (user.equalsIgnoreCase("molinaDario")) && pass.equalsIgnoreCase("1234")) {
+        if (user != null && pass != null) {
 
+            if (user.equalsIgnoreCase("molinaDario") && pass.equalsIgnoreCase("1234")) {
+
+                miCliente = clienteService.findCliente(1);
+                System.out.println("Mi cliente es: " + miCliente);
+
+            } else if (user.equalsIgnoreCase("molinaFernando") && pass.equalsIgnoreCase("4321")) {
+                miCliente = clienteService.findCliente(2);
+            }
+
+            request.getSession().setAttribute("sessionCliente", miCliente);
             request.getRequestDispatcher("MenuSeleccion.jsp").forward(request, response);
 
         } else {

@@ -4,6 +4,7 @@ com/molinadario/implementes/ClienteImplementsService.class
 com/molinadario/implementes/ProductoImplementsService.class
 com/molinadario/entity/Cliente.class
 com/molinadario/entity/Producto.class
+com/molinadario/controller/CanjeProducto.class
 org/netbeans/rest/application/config/ApplicationConfig.class
 com/molindario/exception/ClienteException.class
 com/molinadario/controller/ProductoController.class

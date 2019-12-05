@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.molinadario.webservice.ClienteWebService.class);
+        resources.add(com.molinadario.webservice.ProductoWebService.class);
     }
     
 }

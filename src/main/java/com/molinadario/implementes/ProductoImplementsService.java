@@ -49,4 +49,26 @@ public class ProductoImplementsService implements ProductoService {
         }
     }
 
+    @Override
+    public void updateProducto(Producto updateProducto) {
+
+        Producto findProducto = entityManager.find(Producto.class, updateProducto.getId_producto());
+
+        if (findProducto != null) {
+            entityManager.merge(updateProducto);
+        } else {
+            throw new ProductoException("El produacto no existe");
+        }
+    }
+
+    @Override
+    public Producto buscarProducto(String nombreProducto) {
+
+        if (entityManager.find(Producto.class, nombreProducto).getNombre() != null) {
+            return entityManager.find(Producto.class, nombreProducto);
+        } else {
+            throw new ProductoException("El producto no existe");
+        }
+    }
+
 }

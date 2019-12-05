@@ -14,8 +14,8 @@ public interface ClienteService {
 
     void deleteCliente(int idCliente);
 
-    void updateCliente(int idCliente, Cliente updateCliente);
-
+    Cliente updateCliente(Cliente updateCliente);
+    
     List<Canje> findCanje(int idCliente);
     
     List<Cliente> allCliente();
